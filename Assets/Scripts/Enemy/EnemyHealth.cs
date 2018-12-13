@@ -55,6 +55,21 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    public void TakeFlameDamage(int amount)
+    {
+        if (isDead)
+            return;
+
+        enemyAudio.Play();
+
+        currentHealth -= amount;
+        
+        if (currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+
 
     void Death ()
     {

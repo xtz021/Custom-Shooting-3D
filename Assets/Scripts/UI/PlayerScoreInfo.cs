@@ -14,26 +14,17 @@ public class PlayerScoreInfo : MonoBehaviour {
     {
         playerRName = null;
         playerRScore = 0;
-        if(PlayerPrefs.HasKey("NumbPlayer"))
+        numberPlayersInfo = 0;
+        int c = 1;
+        while(PlayerPrefs.HasKey(c + "HScoreName") || PlayerPrefs.HasKey(c + "HScore"))
         {
-            numberPlayersInfo = PlayerPrefs.GetInt("NumbPlayer");
-        }
-        else
-        {
-            numberPlayersInfo = 0;
-        }
-        if(PlayerPrefs.HasKey("HighScore"))         //Check if there was a highscore that was saved in PlayerPrefs
-        {
-            highScore = PlayerPrefs.GetInt("HighScore");
-        }
-        else
-        {
-            highScore = 0;
-            PlayerPrefs.SetInt("HighScore", 0);
-        }
-        if(PlayerPrefs.HasKey("HighScoreName"))     //Check highscore player's name that was saved in PlayerPrefs
-        {
-            highScoreName = PlayerPrefs.GetString("HighScoreName");
+            if (PlayerPrefs.GetString(c + "HScoreName") == null || PlayerPrefs.GetString(c + "HScoreName") == "" || PlayerPrefs.GetInt(c + "HScore")==0)
+            {
+                PlayerPrefs.DeleteKey(c + "HScoreName");
+                break;
+            }
+            numberPlayersInfo = c;
+            c++;
         }
         
     }

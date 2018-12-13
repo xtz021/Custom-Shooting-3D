@@ -26,37 +26,34 @@ public class ShowScoreBoard : MonoBehaviour {
             }
 
             //Sort by score ranking
-            listScore = SortingScoreRank(listScore);
+            SortingScoreRank(listScore);
         }
-        Debug.Log("" + listScore[0].getName());
         for (int i = 0; i < listScore.Count; i++)
         {
             GameObject ScoreGO = (GameObject)Instantiate(ItemListEntryPrefab);
             ScoreGO.transform.SetParent(this.transform);
             ScoreGO.transform.Find("Rank").GetComponent<Text>().text = (i + 1).ToString();
-            ScoreGO.transform.Find("Player Name").GetComponent<Text>().text = listScore[i].getName();
-            ScoreGO.transform.Find("Score").GetComponent<Text>().text = listScore[i].getScore().ToString();
+            ScoreGO.transform.Find("Player Name").GetComponent<Text>().text = listScore[i].GetName();
+            ScoreGO.transform.Find("Score").GetComponent<Text>().text = listScore[i].GetScore().ToString();
         }
 
 
     }
 
-    List<PlayerInfoObject> SortingScoreRank(List<PlayerInfoObject> ltScore)
+    void SortingScoreRank(List<PlayerInfoObject> ltScore)
     {
         for(int i = 0; i < ltScore.Count - 1; i++)
             for(int j = i+1; j < ltScore.Count; j++)
             {
-                if(ltScore[i].getScore() < ltScore[j].getScore())
+                if(ltScore[i].GetScore() < ltScore[j].GetScore())
                 {
                     PlayerInfoObject pio = ltScore[i];
                     ltScore[i] = ltScore[j];
                     ltScore[j] = pio;
                 }
             }
-        return ltScore;
     }
-
-
+    
 
     private class PlayerInfoObject
     {
@@ -75,17 +72,17 @@ public class ShowScoreBoard : MonoBehaviour {
             this.score = 0;
         }
 
-        public string getName()
+        public string GetName()
         {
             return name;
         }
 
-        public int getScore()
+        public int GetScore()
         {
             return score;
         }
 
-        public void setScore(int score)
+        public void GetScore(int score)
         {
             this.score = score;
         }

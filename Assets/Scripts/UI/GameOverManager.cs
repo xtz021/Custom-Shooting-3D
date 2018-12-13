@@ -8,31 +8,39 @@ public class GameOverManager : MonoBehaviour
 {
     public PlayerHealth playerHealth;
     public float restartDelay = 5f;
+    public GameObject saveScorePanel;
+
     GameObject restartButton;
-    GameObject saveScorePanel;
+    GameObject menuButton;
+    GameObject scoreBoardButton;
+    FlameThrowerShooting flameThrowerShooting;
     
-
-
     Animator anim;
     float restartTimer;
 
+    int check = 0;      // To call Coroutine
 
     void Awake()
     {
         anim = GetComponent<Animator>();
         restartButton = GameObject.Find("RestartButton");
         restartButton.SetActive(false);
-        saveScorePanel = GameObject.Find("SaveScorePanel");
-        saveScorePanel.SetActive(false);
+        menuButton = GameObject.Find("MenuButton");
+        menuButton.SetActive(false);
+        scoreBoardButton = GameObject.Find("ScoreBoardButton");
+        scoreBoardButton.SetActive(false);
+        flameThrowerShooting = GameObject.Find("Flames").GetComponent<FlameThrowerShooting>();
     }
 
 
     void Update()
     {
-        if (playerHealth.currentHealth <= 0)
+        if (playerHealth.currentHealth <= 0 && check == 0)
         {
+            flameThrowerShooting.enabled = false;
             anim.SetTrigger("GameOver");
-            StartCoroutine(EnableRestartButton());
+
+            check = 1;
             //restartTimer += Time.deltaTime;
 
             //if (restartTimer >= restartDelay)
@@ -40,12 +48,18 @@ public class GameOverManager : MonoBehaviour
             //    StartCoroutine(WaitForSecs());
             //}
         }
+        if(check == 1)
+        {
+            check = -1;
+            StartCoroutine(EnableEndGameMenu());
+        }
+        
+
     }
 
-    IEnumerator EnableRestartButton()
+    IEnumerator EnableEndGameMenu()
     {
-        yield return new WaitForSeconds(1);
-        restartButton.SetActive(true);
+        yield return new WaitForSeconds(2);
         saveScorePanel.SetActive(true);
     }
 }
