@@ -13,7 +13,7 @@ public class GameOverManager : MonoBehaviour
     GameObject restartButton;
     GameObject menuButton;
     GameObject scoreBoardButton;
-    FlameThrowerShooting flameThrowerShooting;
+    FlameBoxCastShooting flameThrowerShooting;
     
     Animator anim;
     float restartTimer;
@@ -29,7 +29,8 @@ public class GameOverManager : MonoBehaviour
         menuButton.SetActive(false);
         scoreBoardButton = GameObject.Find("ScoreBoardButton");
         scoreBoardButton.SetActive(false);
-        flameThrowerShooting = GameObject.Find("Flames").GetComponent<FlameThrowerShooting>();
+        //flameThrowerShooting = GameObject.Find("Flames").GetComponent<FlameThrowerShooting>();
+        flameThrowerShooting = GameObject.Find("Flames").GetComponent<FlameBoxCastShooting>();
     }
 
 

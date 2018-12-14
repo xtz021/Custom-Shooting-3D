@@ -56,12 +56,7 @@ public class FlameThrowerShooting : MonoBehaviour {
         gunParticles.Stop();
         gunAudio.Stop();
     }
-
-    IEnumerator DelayProjectileShooting()
-    {
-        yield return new WaitForSeconds(.5f);
-        Shoot();
-    }
+    
 
     void Shoot()
     {

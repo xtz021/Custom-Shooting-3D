@@ -149,6 +149,7 @@
     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Managers\EnemyNumberManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
+    <Compile Include="Assets\Scripts\Player\FlameBoxCastShooting.cs" />
     <Compile Include="Assets\Scripts\Player\FlameParticlesTrigger.cs" />
     <Compile Include="Assets\Scripts\Player\FlameThrowerShooter2.cs" />
     <Compile Include="Assets\Scripts\Player\FlameThrowerShooting.cs" />
