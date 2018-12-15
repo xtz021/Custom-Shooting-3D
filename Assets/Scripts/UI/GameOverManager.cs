@@ -30,7 +30,7 @@ public class GameOverManager : MonoBehaviour
         scoreBoardButton = GameObject.Find("ScoreBoardButton");
         scoreBoardButton.SetActive(false);
         //flameThrowerShooting = GameObject.Find("Flames").GetComponent<FlameThrowerShooting>();
-        flameThrowerShooting = GameObject.Find("Flames").GetComponent<FlameBoxCastShooting>();
+        flameThrowerShooting = GameObject.Find("FlameThrower").GetComponent<FlameBoxCastShooting>();
     }
 
 
@@ -42,12 +42,6 @@ public class GameOverManager : MonoBehaviour
             anim.SetTrigger("GameOver");
 
             check = 1;
-            //restartTimer += Time.deltaTime;
-
-            //if (restartTimer >= restartDelay)
-            //{
-            //    StartCoroutine(WaitForSecs());
-            //}
         }
         if(check == 1)
         {
