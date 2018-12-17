@@ -150,9 +150,6 @@
     <Compile Include="Assets\Scripts\Managers\EnemyNumberManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Player\FlameBoxCastShooting.cs" />
-    <Compile Include="Assets\Scripts\Player\FlameParticlesTrigger.cs" />
-    <Compile Include="Assets\Scripts\Player\FlameThrowerShooter2.cs" />
-    <Compile Include="Assets\Scripts\Player\FlameThrowerShooting.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
@@ -161,9 +158,7 @@
     <Compile Include="Assets\Scripts\UI\MenuButtonHandler.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerScoreInfo.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerScoreManager.cs" />
-    <Compile Include="Assets\Scripts\UI\RestartButtonHandler.cs" />
     <Compile Include="Assets\Scripts\UI\ScoreBoardBackButtonHandler.cs" />
-    <Compile Include="Assets\Scripts\UI\ScoreBoardButtonHandler.cs" />
     <Compile Include="Assets\Scripts\UI\ShowScoreBoard.cs" />
     <Compile Include="Assets\Scripts\UI\StartGameButtonHandler.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
@@ -428,12 +423,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/xavie/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="ChannelPurchase">
-      <HintPath>C:/Users/xavie/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.xiaomi@1.0.3/ChannelPurchase.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityStore">
-      <HintPath>C:/Users/xavie/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.xiaomi@1.0.3/UnityStore.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>

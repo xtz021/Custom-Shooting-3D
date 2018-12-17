@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class FlameBoxCastShooting : MonoBehaviour {
 
-    public int damagePerShot = 15;
-    public float timeBetweenBullets = 0.15f;
-    public float range = 8f;
-    //public GameObject impactEffect;
-    //public GameObject impactEffect2;
-    
+    [SerializeField]
+    int damagePerShot = 15;
+
+    [SerializeField]
+    float timeBetweenBullets = 0.15f;
+
+    [SerializeField]
+    float range = 9f;
+
+    [SerializeField]
+    GameObject impactEffect;
+
+    [SerializeField]
+    GameObject impactEffect2;
+
     float timer;
     BoxCollider colliderBox;
-    BoxCollider oldBox;
     RaycastHit[] shootHit;
     int shootableMask;
     ParticleSystem gunParticles;
@@ -20,6 +28,9 @@ public class FlameBoxCastShooting : MonoBehaviour {
     AudioSource gunAudio;
     float effectsDisplayTime = 1f;
 
+    float oldX;
+    float xAxis;
+    float currentRange;
     // Use this for initialization
     void Awake () {
         shootableMask = LayerMask.GetMask("Shootable");
@@ -27,7 +38,9 @@ public class FlameBoxCastShooting : MonoBehaviour {
         gunParticles.Stop();
         gunAudio = GetComponent<AudioSource>();
         colliderBox = GetComponent<BoxCollider>();
-        oldBox = colliderBox;
+        xAxis = colliderBox.size.x;
+        oldX = xAxis;
+        currentRange = 1;
     }
 	
 	// Update is called once per frame
@@ -36,30 +49,37 @@ public class FlameBoxCastShooting : MonoBehaviour {
 
         if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
-            oldBox = colliderBox;
             gunAudio.Play();
             gunParticles.Play();
             Shoot();
+            if(xAxis < 3f)
+            {
+                xAxis += 0.2f;
+            }
+            if(currentRange < range)
+            {
+                currentRange += 1.5f;
+                if (currentRange > range)
+                {
+                    currentRange = range;
+                }
+             }
+            colliderBox.size = new Vector3(xAxis,colliderBox.size.y,colliderBox.size.z);
         }
         if (timer >= timeBetweenBullets * effectsDisplayTime)
         {
             StopShootingEffect();
-            colliderBox = oldBox;
+            xAxis = oldX;
+            currentRange = 1;
         }
 
     }
 
     void Shoot()
     {
-
-        if (Physics.BoxCast(colliderBox.bounds.center,colliderBox.size,transform.forward,
-            colliderBox.transform.rotation,range,shootableMask))
+        shootHit = Physics.BoxCastAll(colliderBox.bounds.center, colliderBox.size/2, transform.forward, colliderBox.transform.rotation, currentRange, shootableMask);
+        if (shootHit.Length > 0)
         {
-            float xAxis = colliderBox.size.x;
-            float yAxis = colliderBox.size.y;
-            float zAxis = colliderBox.size.z;
-            colliderBox.size.Set(xAxis * 1.5f, yAxis, zAxis);
-            shootHit = Physics.BoxCastAll(colliderBox.bounds.center, colliderBox.size, transform.forward, colliderBox.transform.rotation, range, shootableMask);
             for(int i = 0; i < shootHit.Length; i++)
             {
                 EnemyHealth enemyHealth = shootHit[i].collider.GetComponent<EnemyHealth>();
@@ -68,10 +88,10 @@ public class FlameBoxCastShooting : MonoBehaviour {
                     enemyHealth.TakeDamage(damagePerShot, shootHit[i].point);
 
                     //Create fire effect on hit
-                    //GameObject impactGO = Instantiate(impactEffect,shootHit.point, Quaternion.LookRotation(shootHit.normal));
-                    //GameObject impactGO2 = Instantiate(impactEffect2, shootHit.point, Quaternion.LookRotation(shootHit.normal));
-                    //Destroy(impactGO, 1f);
-                    //Destroy(impactGO2, 2f);
+                    GameObject impactGO = Instantiate(impactEffect, shootHit[i].point, Quaternion.LookRotation(shootHit[i].normal));
+                    GameObject impactGO2 = Instantiate(impactEffect2, shootHit[i].point, Quaternion.LookRotation(shootHit[i].normal));
+                    Destroy(impactGO, 1f);
+                    Destroy(impactGO2, 2f);
                 }
             }
         }

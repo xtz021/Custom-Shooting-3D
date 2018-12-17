@@ -5752,6 +5752,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePerHit: 5
   timeBetweenBullets: 0.15
+  gunParticles: {fileID: 0}
+  hitTarget: {fileID: 0}
 --- !u!199 &311553803
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -11702,7 +11704,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePerShot: 15
   timeBetweenBullets: 0.15
-  range: 8
+  range: 9
+  impactEffect: {fileID: 159814, guid: 3c5f4e32698bdb04eaed647f60310510, type: 2}
+  impactEffect2: {fileID: 176684, guid: 8a23a06107e96134598493163a37174f, type: 2}
 --- !u!65 &1276306019
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11713,7 +11717,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8, y: 0.4, z: 0.5}
+  m_Size: {x: 2, y: 0.4, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &1276306020
 AudioSource:
