@@ -37,6 +37,8 @@ public class FlameBoxCastShooting : MonoBehaviour {
         gunParticles = GetComponent<ParticleSystem>();
         gunParticles.Stop();
         gunAudio = GetComponent<AudioSource>();
+        //colliderBox = new BoxCollider();
+        //colliderBox.size = new Vector3(2f,0.4f,0.5f);
         colliderBox = GetComponent<BoxCollider>();
         xAxis = colliderBox.size.x;
         oldX = xAxis;
@@ -52,7 +54,7 @@ public class FlameBoxCastShooting : MonoBehaviour {
             gunAudio.Play();
             gunParticles.Play();
             Shoot();
-            if(xAxis < 3f)
+            if(xAxis < 3.5f)
             {
                 xAxis += 0.2f;
             }
@@ -77,14 +79,16 @@ public class FlameBoxCastShooting : MonoBehaviour {
 
     void Shoot()
     {
+        // catch a list of enemies in range
         shootHit = Physics.BoxCastAll(colliderBox.bounds.center, colliderBox.size/2, transform.forward, colliderBox.transform.rotation, currentRange, shootableMask);
-        if (shootHit.Length > 0)
+        if (shootHit.Length > 0)    //check if there is any enemy target in range
         {
-            for(int i = 0; i < shootHit.Length; i++)
+            for(int i = 0; i < shootHit.Length; i++) // Deals damage to every single one of them
             {
                 EnemyHealth enemyHealth = shootHit[i].collider.GetComponent<EnemyHealth>();
                 if (enemyHealth != null)
                 {
+                    //deal damage to the target enemy
                     enemyHealth.TakeDamage(damagePerShot, shootHit[i].point);
 
                     //Create fire effect on hit

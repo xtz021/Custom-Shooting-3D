@@ -91,6 +91,6 @@ public class EnemyHealth : MonoBehaviour
         isSinking = true;
         ScoreManager.score += scoreValue;
         EnemyNumberManager.enemyCount--;
-        Destroy (gameObject, 2f);
+        Destroy (transform.parent, 2f);
     }
 }

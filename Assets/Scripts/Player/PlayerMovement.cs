@@ -2,6 +2,7 @@
 
 public class PlayerMovement : MonoBehaviour
 {
+    public const float defaultSpeed = 6.0f;
     public float speed = 6.0f;                  // The speed that the player will move at.
 
     private Vector3 movement;                   // The vector to store the direction of the player's movement.

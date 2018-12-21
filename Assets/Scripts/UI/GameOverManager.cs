@@ -14,6 +14,9 @@ public class GameOverManager : MonoBehaviour
     GameObject menuButton;
     GameObject scoreBoardButton;
     FlameBoxCastShooting flameThrowerShooting;
+    PlayerShooting rifleShooting;
+    static bool usingFlameThrower;
+    static bool usingRifle;
     
     Animator anim;
     float restartTimer;
@@ -29,8 +32,18 @@ public class GameOverManager : MonoBehaviour
         menuButton.SetActive(false);
         scoreBoardButton = GameObject.Find("ScoreBoardButton");
         scoreBoardButton.SetActive(false);
-        //flameThrowerShooting = GameObject.Find("Flames").GetComponent<FlameThrowerShooting>();
-        flameThrowerShooting = GameObject.Find("FlameThrower").GetComponent<FlameBoxCastShooting>();
+        if (GameObject.Find("FlameThrower") != null)
+        {
+            usingFlameThrower = true;
+        }
+        else
+            usingFlameThrower = false;
+        if (GameObject.Find("GunRifle") != null)
+        {
+            usingRifle = true;
+        }
+        else
+            usingRifle = false;
     }
 
 
@@ -38,7 +51,17 @@ public class GameOverManager : MonoBehaviour
     {
         if (playerHealth.currentHealth <= 0 && check == 0)
         {
-            flameThrowerShooting.enabled = false;
+            if(usingFlameThrower)
+            {
+                flameThrowerShooting = GameObject.Find("FlameThrower").GetComponent<FlameBoxCastShooting>();
+                flameThrowerShooting.enabled = false;
+            }
+            if(usingRifle)
+            {
+                rifleShooting = GameObject.Find("GunRifle").GetComponent<PlayerShooting>();
+                rifleShooting.enabled = false;
+            }
+
             anim.SetTrigger("GameOver");
 
             check = 1;
